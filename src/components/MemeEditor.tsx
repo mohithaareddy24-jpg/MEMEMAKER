@@ -18,8 +18,49 @@ export default function MemeEditor({ selectedMeme, onClose }: MemeEditorProps) {
   const [fontSize, setFontSize] = useState(40);
   const [textColor, setTextColor] = useState('#ffffff');
   const [textShadow, setTextShadow] = useState(true);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
   
   const memeRef = useRef<HTMLDivElement>(null);
+
+  // Fetch image as blob to avoid CORS issues with html-to-image
+  useEffect(() => {
+    const fetchImageAsBlob = async () => {
+      if (!selectedMeme?.url) return;
+      
+      setImageLoading(true);
+      setBlobUrl(null);
+      
+      try {
+        const response = await fetch(selectedMeme.url, {
+          mode: 'cors',
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch image');
+        }
+        
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        setBlobUrl(url);
+      } catch (error) {
+        console.error('Error loading image:', error);
+        // Fallback to original URL if blob fails
+        setBlobUrl(selectedMeme.url);
+      } finally {
+        setImageLoading(false);
+      }
+    };
+
+    fetchImageAsBlob();
+
+    // Cleanup blob URL to avoid memory leaks
+    return () => {
+      if (blobUrl && blobUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+  }, [selectedMeme?.url]);
 
   // Reset state when meme changes
   useEffect(() => {
@@ -75,9 +116,14 @@ export default function MemeEditor({ selectedMeme, onClose }: MemeEditorProps) {
         {/* Preview Area */}
         <div className="flex flex-col gap-4">
           <div className="relative bg-gray-100 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] overflow-hidden group">
+            {imageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+                <div className="w-8 h-8 border-4 border-black border-t-transparent animate-spin rounded-full" />
+              </div>
+            )}
             <div ref={memeRef} className="relative bg-white w-full h-full flex items-center justify-center overflow-hidden">
               <img 
-                src={selectedMeme.url} 
+                src={blobUrl || selectedMeme?.url} 
                 alt={selectedMeme.name} 
                 className="w-full h-auto object-contain max-h-[500px]"
                 crossOrigin="anonymous"
