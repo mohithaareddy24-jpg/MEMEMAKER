@@ -1,0 +1,142 @@
+# MemeGen - AI-Powered Meme Generator
+
+## Project Overview
+
+MemeGen is a modern, AI-powered web application that allows users to create memes instantly using artificial intelligence. Built with React, Vite, and Google's Gemini API, it combines the fun of meme culture with the power of AI to generate witty captions automatically.
+
+---
+
+## What This Project Does
+
+1. **Meme Template Gallery**
+   - Fetches popular meme templates from the Imgflip API
+   - Displays a searchable gallery of meme templates
+   - Users can browse and select any template to edit
+
+2. **AI-Powered Caption Generation**
+   - Uses Google's Gemini 3 Flash AI model
+   - Automatically generates funny, relevant captions for selected memes
+   - Provides both top and bottom text for classic meme format
+
+3. **Meme Editor**
+   - Customize text with font size and color options
+   - Toggle text outline/shadow for readability
+   - Real-time preview of the meme
+   - Download the final meme as a PNG image
+
+---
+
+## Technology Stack
+
+| Category | Technology |
+|----------|------------|
+| Frontend Framework | React 18 with TypeScript |
+| Build Tool | Vite |
+| Styling | Tailwind CSS |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| AI Integration | Google Gemini API |
+| Image Processing | html-to-image |
+| File Saving | file-saver |
+
+---
+
+## Key Features
+
+- **AI Caption Generation**: One-click AI-powered caption generation using Gemini
+- **Template Library**: Access to 100+ popular meme templates via Imgflip API
+- **Customization**: Font size, text color, and outline controls
+- **Export**: Download memes as high-quality PNG files
+- **Modern UI**: Clean, brutalist-inspired design with smooth animations
+
+---
+
+## How to Run
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Set up your API key:
+   - Create a `.env` file in the project root
+   - Add your Google Gemini API key:
+   ```
+   GEMINI_API_KEY=your_api_key_here
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser to the URL shown (usually http://localhost:5173)
+
+---
+
+## Project Structure
+
+```
+meme-generator/
+├── src/
+│   ├── components/
+│   │   ├── MemeEditor.tsx    # Meme editing interface
+│   │   └── MemeGallery.tsx   # Template gallery
+│   ├── services/
+│   │   ├── ai.ts             # Gemini AI integration
+│   │   └── imgflip.ts        # Imgflip API integration
+│   ├── App.tsx               # Main application component
+│   ├── main.tsx              # Entry point
+│   └── index.css             # Global styles
+├── index.html
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
+
+---
+
+## API Integration
+
+### Imgflip API
+- Used to fetch the library of meme templates
+- Endpoint: `https://api.imgflip.com/get_memes`
+- Returns array of meme objects with ID, name, URL, dimensions
+
+### Google Gemini API
+- Used for AI-powered caption generation
+- Model: `gemini-3-flash-preview`
+- Generates JSON response with `topText` and `bottomText`
+
+---
+
+## Use Cases
+
+1. **Content Creators**: Quickly generate memes for social media
+2. **Marketing Teams**: Create timely, relevant memes for campaigns
+3. **Casual Users**: Have fun creating personalized memes with AI help
+4. **Developers**: Learn how to integrate AI APIs into web applications
+
+---
+
+## Security Notes
+
+- API keys are stored in `.env` files (not committed to git)
+- The `.gitignore` excludes all `.env*` files
+- CORS handling for image loading is configured
+
+---
+
+## Future Enhancements
+
+- Multiple AI model options
+- Custom image upload support
+- Meme sharing to social media directly
+- Save favorites/local storage
+- More text styling options
+- Batch meme generation
+
+---
+
+
+

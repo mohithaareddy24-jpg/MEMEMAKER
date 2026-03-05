@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Anton", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brutal-bg: #ffffff;
+  --color-brutal-fg: #000000;
+  --color-brutal-accent: #a3e635; /* Lime 400 */
+  --color-brutal-secondary: #f472b6; /* Pink 400 */
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: #f3f4f6;
+    color: var(--color-brutal-fg);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+}
+
+.brutal-border {
+  border: 2px solid var(--color-brutal-fg);
+  box-shadow: 4px 4px 0px 0px var(--color-brutal-fg);
+}
+
+.brutal-border-sm {
+  border: 2px solid var(--color-brutal-fg);
+  box-shadow: 2px 2px 0px 0px var(--color-brutal-fg);
+}
+
+.brutal-btn {
+  @apply font-bold uppercase tracking-wider px-6 py-3 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none bg-white hover:bg-lime-300 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+}
+
+.brutal-input {
+  @apply w-full px-4 py-3 font-mono border-2 border-black focus:outline-none focus:ring-0 focus:bg-yellow-50 transition-colors;
+}
