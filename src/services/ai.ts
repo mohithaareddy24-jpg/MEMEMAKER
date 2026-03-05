@@ -5,8 +5,7 @@ let client: GoogleGenAI | null = null;
 
 const getClient = () => {
   if (!client) {
-    const apiKey = "REMOVED_KEY";
-    console.log("API Key loaded:", apiKey ? "Yes" : "No");
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error("GEMINI_API_KEY is missing. Please set it in your .env file.");
       throw new Error("API Key Missing");
@@ -19,7 +18,7 @@ const getClient = () => {
 export const generateMemeCaption = async (memeName: string): Promise<{ topText: string; bottomText: string }> => {
   try {
     const api = getClient();
-    const model = "gemini-2.0-flash";
+    const model = "gemini-3-flash-preview";
     const prompt = `Generate a funny, witty, and relevant caption for the meme template "${memeName}". 
     Return ONLY a JSON object with "topText" and "bottomText" keys. 
     Keep the text concise and suitable for a meme. 
