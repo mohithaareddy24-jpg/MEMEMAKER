@@ -5,7 +5,7 @@ let client: GoogleGenAI | null = null;
 
 const getClient = () => {
   if (!client) {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = "REMOVED_KEY";
     console.log("API Key loaded:", apiKey ? "Yes" : "No");
     if (!apiKey) {
       console.error("GEMINI_API_KEY is missing. Please set it in your .env file.");
