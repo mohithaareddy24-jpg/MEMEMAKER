@@ -1,0 +1,13 @@
+<parameter name="content">#!/bin/bash
+
+# Deploy script for Meme Generator to GitHub Pages
+
+echo "=== Building the project ==="
+npm run build
+
+echo "=== Deploying to GitHub Pages ==="
+npm run deploy
+
+echo "=== Deployment complete! ==="
+echo "Your site should be available at: https://mohithaareddy24-jpg.github.io/MEMEMAKER/"
+</parameter>
