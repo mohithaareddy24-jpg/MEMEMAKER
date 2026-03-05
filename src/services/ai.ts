@@ -1,4 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 // Lazily initialize the API client
 let client: GoogleGenAI | null = null;
